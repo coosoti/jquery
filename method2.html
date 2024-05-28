@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery $.get() Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>jQuery $.get() Example</h1>
+
+    <!-- Button to Fetch Data -->
+    <button id="fetchGetDataBtn">Fetch Data with $.get()</button>
+
+    <!-- Display Area for Data -->
+    <div id="getDataDisplay"></div>
+
+    <script>
+        // Function to fetch data from API using $.get()
+        $('#fetchGetDataBtn').click(function() {
+            $.get('https://jsonplaceholder.typicode.com/posts', function(response) {
+                // Display data in the getDataDisplay div
+                let htmlContent = '';
+                response.forEach(post => {
+                    htmlContent += `<h3>${post.title}</h3><p>${post.body}</p>`;
+                });
+                $('#getDataDisplay').html(htmlContent);
+            }).fail(function(xhr, status, error) {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
+

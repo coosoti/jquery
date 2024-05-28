@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery $.post() Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>jQuery $.post() Example</h1>
+
+    <!-- Form to Post Data -->
+    <form id="postDataForm">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+        <label for="body">Body:</label>
+        <textarea id="body" name="body" required></textarea>
+        <button type="submit">Submit Data</button>
+    </form>
+
+    <!-- Display Area for Response -->
+    <div id="postResponseDisplay"></div>
+
+    <script>
+        // Function to post data to API using $.post()
+        $('#postDataForm').submit(function(event) {
+            event.preventDefault();
+            const postData = {
+                title: $('#title').val(),
+                body: $('#body').val()
+            };
+
+            $.post('https://jsonplaceholder.typicode.com/posts', postData, function(response) {
+                // Display response in the postResponseDisplay div
+                $('#postResponseDisplay').html(`<h3>${response.title}</h3><p>${response.body}</p>`);
+            }).fail(function(xhr, status, error) {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
+

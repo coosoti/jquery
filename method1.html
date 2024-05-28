@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery $.ajax() Example</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>jQuery $.ajax() Example</h1>
+
+    <!-- Button to Fetch Data -->
+    <button id="fetchAjaxDataBtn">Fetch Data with $.ajax()</button>
+
+    <!-- Display Area for Data -->
+    <div id="ajaxDataDisplay"></div>
+
+    <script>
+        // Function to fetch data from API using $.ajax()
+        $('#fetchAjaxDataBtn').click(function() {
+            $.ajax({
+                url: 'https://jsonplaceholder.typicode.com/posts',
+                type: 'GET',
+                success: function(response) {
+                    // Display data in the ajaxDataDisplay div
+                    let htmlContent = '';
+                    response.forEach(post => {
+                        htmlContent += `<h3>${post.title}</h3><p>${post.body}</p>`;
+                    });
+                    $('#ajaxDataDisplay').html(htmlContent);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
